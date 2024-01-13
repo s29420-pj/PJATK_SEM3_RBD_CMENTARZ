@@ -1,0 +1,26 @@
+-- Tworzenie procedury
+DELIMITER //
+
+CREATE PROCEDURE PobierzPracownikowNaStanowisku(IN stanowisko_param VARCHAR(30))
+BEGIN
+    SELECT * FROM PRACOWNICY WHERE stanowisko = stanowisko_param;
+END //
+
+DELIMITER ;
+
+-- Zapytania Agregujące
+
+-- Liczba pracowników
+SELECT COUNT(*) AS 'liczba pracowników' FROM PRACOWNICY;
+
+-- Sumowanie opłat cmentarnych
+SELECT SUM(kwota) AS 'suma opłat' FROM OPLATY_CMENTARNE;
+
+-- Średni wiek nieboszczyków na cmentarzu
+SELECT AVG(YEAR(CURDATE()) - YEAR(data_urodzenia)) AS sredni_wiek FROM NIEBOSZCZYK;
+
+-- Łączna liczba pracowników na danym stanowisku
+SELECT stanowisko, COUNT(*) AS liczba_pracownikow FROM PRACOWNICY GROUP BY stanowisko;
+
+-- Najnowsze zdarzenie dla danego grobu
+SELECT grob_id, MAX(data_zdarzenia) AS najnowsze_zdarzenie FROM HISTORIA_GROBU GROUP BY grob_id;
