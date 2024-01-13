@@ -46,6 +46,7 @@ SET imie = 'Marcin', nazwisko = 'Jakubowski'
 WHERE imie = 'Marek' AND nazwisko = 'Lewańczyk';
 
 -- Trigger
+DELIMITER //
 CREATE TRIGGER sprawdz_data_smierci
 BEFORE INSERT ON NIEBOSZCZYK
 FOR EACH ROW
@@ -55,3 +56,5 @@ BEGIN
     SET MESSAGE_TEXT = 'Data śmierci nie może być późniejsza niż data urodzenia';
   END IF;
 END;
+//
+DELIMITER ;
